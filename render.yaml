@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: bc-ai-detector1
+    name: bc-ai-detector-1
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
