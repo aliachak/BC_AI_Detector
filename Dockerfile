@@ -1,24 +1,31 @@
-# Use Python 3.9 for TensorFlow and numpy compatibility
-FROM python:3.9-slim
+FROM python:3.11
 
-# Prevents Python from writing .pyc files to disc and enables stdout/stderr log flushing
+# جلوگیری از cache غیر ضروری
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set working directory
+# نصب وابستگی‌های سیستمی
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libopenjp2-7 \
+    libtiff5 \
+    zlib1g-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Install dependencies
+# نصب وابستگی‌ها
 COPY requirements.txt .
-RUN apt-get update && apt-get install -y gcc g++ libglib2.0-0 libsm6 libxext6 libxrender-dev && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip setuptools wheel
 RUN pip install -r requirements.txt
 
-# Copy project files
+# کپی کد پروژه
 COPY . .
 
-# Expose Gradio port
+# پورت Gradio
 EXPOSE 7860
 
-# Run app
+# اجرای اپ
 CMD ["python", "app.py"]
