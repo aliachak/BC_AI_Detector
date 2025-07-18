@@ -57,4 +57,7 @@ def predict_img(img):
 
 iface = gr.Interface(fn=predict_img, inputs=gr.Image(type="numpy"), outputs=gr.Label(num_top_classes=8))
 if __name__ == "__main__":
-    iface.launch(debug=True, share=True)
+   iface.launch(
+    server_name="0.0.0.0",
+    server_port=int(os.environ.get('PORT', 10000))
+)
