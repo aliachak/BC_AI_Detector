@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: bc-ai-detector-1
-    env: python
+    name: my-app
+    env: docker
     plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python app.py"
+    region: frankfurt
+    dockerfilePath: Dockerfile
     envVars:
       - key: PORT
-        value: 10000
+        value: 7860
