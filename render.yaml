@@ -1,9 +1,8 @@
 services:
   - type: web
-    name: my-app
+    name: my-gradio-app
     env: docker
     plan: free
-    region: frankfurt
     dockerfilePath: Dockerfile
     envVars:
       - key: PORT
